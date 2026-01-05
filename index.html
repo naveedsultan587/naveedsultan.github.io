@@ -1,0 +1,1528 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Naveed Sultan — Portfolio</title>
+  <meta name="description" content="Academic portfolio of Naveed Sultan — Remote Sensing, Deep Learning, Transformers, Super-Resolution, Change Detection." />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --panel2:#f6f8ff;
+      --text:#0b1b3a;
+      --muted:#2d3a57;
+      --muted2:#4a5f8a;
+      --brand:#2563eb;
+      --brand2:#7c3aed;
+      --ok:#059669;
+      --warn:#d97706;
+      --border:rgba(11,27,58,.14);
+      --shadow: 0 10px 30px rgba(11,27,58,.10);
+      --radius: 18px;
+      --radius2: 12px;
+      --max: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(900px 400px at 10% 0%, rgba(37,99,235,.10), transparent 55%),
+        radial-gradient(900px 400px at 90% 10%, rgba(124,58,237,.08), transparent 55%),
+        linear-gradient(180deg, #ffffff, #f4f7ff);
+      line-height:1.55;
+    }
+
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px 18px 72px}
+
+    .nav{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,.75);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 18px;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+    }
+    .mark{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(37,99,235,.95), rgba(124,58,237,.90));
+      box-shadow: 0 10px 26px rgba(11,27,58,.15);
+    }
+    .brand h1{font-size:14px; margin:0; letter-spacing:.3px}
+    .brand small{display:block; color:var(--muted2); font-weight:600; margin-top:1px}
+
+    .nav-links{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .nav-links a{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:700;
+      font-size:12.5px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid transparent;
+    }
+    .nav-links a:hover{
+      color:var(--text);
+      border-color:var(--border);
+      background: rgba(11,27,58,.04);
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:800;
+      font-size:13px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.75);
+      color:var(--text);
+      box-shadow: 0 6px 18px rgba(11,27,58,.10);
+      cursor:pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .btn:hover{transform:translateY(-1px); background: rgba(255,255,255,.90)}
+    .btn.primary{
+      border-color: rgba(37,99,235,.30);
+      background: linear-gradient(135deg, rgba(37,99,235,.12), rgba(124,58,237,.10));
+    }
+    .btn::after{
+      content:"";
+      position:absolute;
+      top:-40%;
+      left:-60%;
+      width: 40%;
+      height: 200%;
+      transform: rotate(18deg);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+      opacity: 0;
+    }
+    .btn:hover::after{
+      animation: shine .9s ease;
+      opacity: 1;
+    }
+    @keyframes shine{
+      0%{ left:-60%; }
+      100%{ left:140%; }
+    }
+
+    /* ✅ HERO: make left column fill the full height of right column (no blank gap) */
+    .hero{
+      padding:28px 0 10px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .hero-left{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      min-height: 100%;
+    }
+
+    @media (max-width: 920px){
+      .hero{grid-template-columns:1fr; padding-top:18px}
+      .nav-links{display:none}
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(246,248,255,.92));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position: relative;
+      transition: transform .20s ease, box-shadow .20s ease, border-color .20s ease;
+    }
+    .card .in{padding:22px}
+    .card::after{
+      content:"";
+      position:absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: radial-gradient(600px 200px at 20% 0%, rgba(37,99,235,.14), transparent 60%),
+                  radial-gradient(600px 200px at 80% 0%, rgba(124,58,237,.10), transparent 60%);
+      opacity: 0;
+      transition: opacity .20s ease;
+      pointer-events:none;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 18px 46px rgba(11,27,58,.14);
+      border-color: rgba(37,99,235,.22);
+    }
+    .card:hover::after{ opacity: 1; }
+
+    .kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(37,99,235,.22);
+      background: rgba(37,99,235,.08);
+      color:var(--muted);
+      font-weight:900;
+      font-size:12px;
+      letter-spacing:.35px;
+      text-transform:uppercase;
+      box-shadow: 0 10px 30px rgba(37,99,235,.10);
+    }
+    .kicker::before{
+      content:"";
+      width:8px; height:8px;
+      border-radius:999px;
+      background: linear-gradient(135deg, rgba(37,99,235,.95), rgba(124,58,237,.95));
+      display:inline-block;
+    }
+
+    .title{
+      margin:14px 0 10px;
+      font-size:34px;
+      line-height:1.1;
+      letter-spacing:-.6px;
+    }
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:15.5px;
+      max-width:70ch;
+    }
+
+    .meta{
+      margin-top:14px;
+      display:flex; flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      color:var(--muted2);
+      font-weight:700;
+      font-size:13px;
+    }
+    .pill{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.65);
+      padding:7px 10px;
+      border-radius:999px;
+      display:inline-flex; gap:8px; align-items:center;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+      margin-top:12px; /* reduced */
+    }
+    .span-6{grid-column: span 6}
+    .span-4{grid-column: span 4}
+    .span-8{grid-column: span 8}
+    .span-12{grid-column: span 12}
+    @media (max-width: 920px){
+      .span-6,.span-4,.span-8{grid-column: span 12}
+    }
+
+    .section{margin-top:12px} /* reduced */
+    .section h2{
+      margin:0 0 10px;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+    .section p{margin:0; color:var(--muted)}
+
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding:0;
+      margin:0;
+      list-style:none;
+    }
+    .item{
+      border:1px solid var(--border);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.70);
+      padding:14px 14px 12px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .item:hover{
+      transform: translateY(-1px);
+      border-color: rgba(37,99,235,.22);
+      background: rgba(255,255,255,.86);
+    }
+
+    .item .top{
+      display:flex; gap:10px;
+      justify-content:space-between;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .item h3{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.1px;
+    }
+
+    .pub-title{
+      text-decoration:none;
+      color: var(--text);
+    }
+    .pub-title:hover{ text-decoration: underline; }
+    .pub-title:focus{
+      outline: 2px solid rgba(37,99,235,.35);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .item .where{
+      color:var(--muted2);
+      font-weight:650;
+      font-size:12.5px;
+      margin-top:3px;
+    }
+    .item .time{
+      color:var(--muted2);
+      font-weight:900;
+      font-size:12px;
+      border:1px solid var(--border);
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.75);
+    }
+
+    .item ul{
+      margin:10px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+    }
+
+    .tags{
+      display:flex; flex-wrap:wrap; gap:8px;
+      margin-top:10px;
+    }
+    .tag{
+      font-size:12px;
+      font-weight:800;
+      color:var(--muted);
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.70);
+    }
+
+    .split{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .split a{ text-decoration:none }
+
+    .foot{
+      margin-top:22px;
+      color:var(--muted2);
+      font-size:12px;
+      text-align:center;
+    }
+
+    .search{
+      display:flex; gap:8px; align-items:center;
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background: rgba(255,255,255,.75);
+      padding:10px 12px;
+    }
+    .search input{
+      width:100%;
+      border:0;
+      outline:none;
+      background:transparent;
+      color:var(--text);
+      font-size:13px;
+    }
+
+    .muted{color:var(--muted)}
+    .hr{height:1px; background:var(--border); margin:14px 0}
+
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight:900;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(5,150,105,.25);
+      background: rgba(5,150,105,.10);
+      color: var(--muted);
+    }
+    .badge.warn{
+      border-color: rgba(217,119,6,.28);
+      background: rgba(217,119,6,.10);
+    }
+
+    /* ---------- Animated Aurora Blobs ---------- */
+    .bg-aurora{
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .blob{
+      position:absolute;
+      width: 560px;
+      height: 560px;
+      border-radius: 999px;
+      filter: blur(28px);
+      opacity: .30;
+      mix-blend-mode: multiply;
+      animation: floaty 14s ease-in-out infinite;
+    }
+    .b1{
+      top:-140px; left:-120px;
+      background: radial-gradient(circle at 30% 30%, rgba(37,99,235,.75), transparent 60%),
+                  radial-gradient(circle at 70% 70%, rgba(124,58,237,.55), transparent 58%);
+    }
+    .b2{
+      top: 10%; right:-180px;
+      width: 620px; height: 620px;
+      background: radial-gradient(circle at 30% 30%, rgba(14,165,233,.65), transparent 60%),
+                  radial-gradient(circle at 70% 70%, rgba(217,119,6,.45), transparent 55%);
+      animation-delay: -4s;
+    }
+    .b3{
+      bottom:-220px; left: 35%;
+      width: 680px; height: 680px;
+      background: radial-gradient(circle at 35% 35%, rgba(16,185,129,.55), transparent 62%),
+                  radial-gradient(circle at 70% 70%, rgba(37,99,235,.40), transparent 58%);
+      animation-delay: -8s;
+    }
+    @keyframes floaty{
+      0%   { transform: translate3d(0,0,0) scale(1); }
+      50%  { transform: translate3d(20px, -22px, 0) scale(1.06); }
+      100% { transform: translate3d(0,0,0) scale(1); }
+    }
+
+    /* ---------- Interactive Grid + Spotlight Background ---------- */
+    .bg-grid{
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .55;
+      background:
+        linear-gradient(rgba(11,27,58,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(11,27,58,.06) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at 30% 10%, #000 0%, transparent 62%);
+    }
+    .bg-grid::after{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      background:
+        radial-gradient(800px 360px at 20% 10%, rgba(37,99,235,.10), transparent 60%),
+        radial-gradient(800px 360px at 80% 0%, rgba(124,58,237,.08), transparent 60%);
+      animation: drift 18s ease-in-out infinite;
+    }
+    @keyframes drift{
+      0%{ transform: translate3d(0,0,0); }
+      50%{ transform: translate3d(18px, -14px, 0); }
+      100%{ transform: translate3d(0,0,0); }
+    }
+
+.bg-spotlight{
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  --x: 50%;
+  --y: 18%;
+  background:
+    background:
+  radial-gradient(900px 400px at 10% 0%, rgba(37,99,235,.12), transparent 55%),
+  radial-gradient(900px 400px at 90% 10%, rgba(124,58,237,.10), transparent 55%),
+  linear-gradient(180deg, #f7f9ff, #eef3ff);
+  transparent 70%);
+  filter: saturate(1.05);
+  transition: background .05s linear;
+}
+
+
+    /* Progress bar */
+    .progress{
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: rgba(11,27,58,.08);
+      z-index: 999;
+    }
+    .progress .bar{
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, rgba(37,99,235,.95), rgba(124,58,237,.95), rgba(16,185,129,.90));
+    }
+
+    /* Reveal animation */
+    .reveal{
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Back to top floating button */
+    .to-top{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(11,27,58,.18);
+      background: rgba(255,255,255,.78);
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 900;
+      box-shadow: 0 14px 34px rgba(11,27,58,.14);
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
+      transition: transform .15s ease;
+    }
+    .to-top:hover{ transform: translateY(-2px); }
+
+    /* ✅ NEW: "Fill Space" card styles */
+    .fill-card{ flex: 1; display:flex; }
+    .fill-card .in{ display:flex; flex-direction:column; gap:12px; height:100%; }
+    .fill-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .fill-title{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+    .mini{
+      font-size:12.5px;
+      color:var(--muted);
+      margin:0;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:10px;
+    }
+    @media (max-width: 520px){
+      .stats{grid-template-columns:1fr}
+    }
+    .stat{
+      border:1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,.70);
+      padding:12px;
+    }
+    .stat b{display:block; font-size:16px}
+    .stat span{display:block; font-size:12px; color:var(--muted2); font-weight:750; margin-top:2px}
+
+    .mini-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin:0;
+      padding:0;
+      list-style:none;
+    }
+    .mini-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      border:1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,.70);
+      padding:10px 12px;
+    }
+    .mini-row a{
+      text-decoration:none;
+      font-weight:850;
+      font-size:13px;
+      color:var(--text);
+    }
+    .mini-row a:hover{ text-decoration: underline; }
+    .mini-row small{
+      color:var(--muted2);
+      font-weight:850;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:6px 10px;
+      background: rgba(255,255,255,.75);
+      white-space:nowrap;
+    }
+
+    .fill-actions{
+      margin-top:auto; /* pushes buttons to bottom to always fill height nicely */
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .blob, .bg-grid::after{ animation: none !important; }
+      .bg-spotlight{ transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Animated aurora background -->
+  <div class="bg-aurora" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+
+  <!-- subtle grid + interactive spotlight -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-spotlight" id="spotlight" aria-hidden="true"></div>
+
+  <!-- Scroll progress bar -->
+  <div class="progress" aria-hidden="true"><div class="bar" id="progressBar"></div></div>
+
+  <!-- Back to top -->
+  <button class="to-top" id="toTopBtn" title="Back to top" aria-label="Back to top">↑</button>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <h1>Naveed Sultan</h1>
+          <small>Researcher / Lecturer — Remote Sensing AI</small>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#publications">Publications</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#grants">Grants</a>
+        <a href="#skills">Skills</a>
+        <a href="#service">Service</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="top">
+
+    <!-- ✅ HERO now fully filled (no wasted blank area) -->
+    <section class="hero">
+      <div class="hero-left">
+        <article class="card">
+          <div class="in">
+            <span class="kicker">Portfolio</span>
+            <h2 class="title">Deep Learning for Remote Sensing, Super-Resolution, and Change Detection</h2>
+            <p class="subtitle">
+              Researcher/Lecturer at King Mongkut's University of Technology Thonburi (KMUTT), Department of Computer Engineering.
+              Interests include deep learning, transformers, generative AI, image processing, and AI for remote sensing.
+            </p>
+
+            <div class="meta" role="list">
+              <span class="pill" role="listitem">📍 Bangkok, Thailand</span>
+              <span class="pill" role="listitem">🧠 Transformers • Generative AI • Super-Resolution</span>
+              <span class="pill" role="listitem">🛰️ Remote Sensing • Aerial Imagery • Hyperspectral</span>
+            </div>
+
+            <div class="split">
+              <a class="btn primary" href="mailto:naveedsultan587@gmail.com">Email</a>
+              <a class="btn" href="mailto:naveed.sult@kmutt.ac.th">Work Email</a>
+              <a class="btn" href="https://www.linkedin.com/in/naveed-sultan/" target="_blank" rel="noopener">LinkedIn</a>
+              <a class="btn" href="https://orcid.org/0009-0007-6020-1903" target="_blank" rel="noopener">ORCID</a>
+              <a class="btn" href="https://kirim.kmutt.ac.th/converis/portal/detail/Person/1476810737" target="_blank" rel="noopener">KMUTT Profile</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Search inside hero -->
+        <section class="card">
+          <div class="in">
+            <div class="search" role="search">
+              <span aria-hidden="true">🔎</span>
+              <input id="searchBox" type="search"
+                placeholder="Search experience, publications, teaching, skills… (e.g., 'super-resolution', 'IEEE', 'Python')" />
+            </div>
+          </div>
+        </section>
+
+        <!-- ✅ NEW: Fill remaining height nicely -->
+        <section class="card fill-card">
+          <div class="in">
+            <div class="fill-head">
+              <div>
+                <h3 class="fill-title">Research Snapshot</h3>
+              </div>
+              <span class="kicker" style="margin:0;">Now</span>
+            </div>
+
+            <div class="stats" aria-label="Snapshot stats">
+              <div class="stat">
+                <b id="statPubs">—</b>
+                <span>Publications listed</span>
+              </div>
+              <div class="stat">
+                <b id="statTeaching">—</b>
+                <span>Teaching entries</span>
+              </div>
+              <div class="stat">
+                <b id="statGrants">—</b>
+                <span>Grants listed</span>
+              </div>
+            </div>
+
+            <div class="hr"></div>
+
+            <h3 class="fill-title" style="font-size:14px; margin:0;">Featured</h3>
+            <ul class="mini-list">
+              <li class="mini-row">
+                <a href="#publications">Latest Publications</a>
+                <small>Open</small>
+              </li>
+              <li class="mini-row">
+                <a href="#experience">Work Experience</a>
+                <small>Open</small>
+              </li>
+              <li class="mini-row">
+                <a href="#skills">Skills</a>
+                <small>Open</small>
+              </li>
+            </ul>
+
+            <div class="fill-actions">
+              <a class="btn primary" href="#publications">Browse Publications</a>
+              <a class="btn" href="#contact">Contact</a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <aside class="card">
+        <div class="in">
+          <h2 style="margin:0 0 10px; font-size:16px;">Quick Highlights</h2>
+
+          <div class="tags" aria-label="Highlights">
+            <span class="tag">IEEE Access Peer Reviewer</span>
+            <span class="tag">IEEE GRSS Member</span>
+            <span class="tag">PyTorch • TensorFlow</span>
+            <span class="tag">CUDA • OpenCL</span>
+            <span class="tag">QGIS • OpenCV</span>
+            <span class="tag">Super-Resolution</span>
+            <span class="tag">Change Detection</span>
+          </div>
+
+          <div class="hr"></div>
+
+          <div class="section">
+            <h2>Education</h2>
+            <ul class="list" id="eduList">
+              <li class="item">
+                <div class="top">
+                  <div>
+                    <h3>Master's of Engineering — Data Analytics</h3>
+                    <div class="where">Chulalongkorn University, Bangkok, Thailand • GPA 3.55/4.00</div>
+                  </div>
+                  <div class="time">Jul 2022 – Jun 2024</div>
+                </div>
+                <ul>
+                  <li>Thesis: Channel and Spatial Attention Feature Extraction Method for Remote Sensing Image Super-Resolution using Vision Transformer</li>
+                  <li>Focus: Computer Vision, Image Processing, Deep Neural Networks, AI, Research Methodology</li>
+                </ul>
+              </li>
+
+              <li class="item">
+                <div class="top">
+                  <div>
+                    <h3>Bachelor's of Sciences — Information Technology</h3>
+                    <div class="where">Khwaja Fareed University of Engineering and Information Technology, Pakistan • GPA 3.80/4.00</div>
+                  </div>
+                  <div class="time">Oct 2017 – Aug 2021</div>
+                </div>
+                <ul>
+                  <li>Thesis: Problem Extraction and Sentimental Analysis of Amazon Product Reviews using Machine Learning Techniques</li>
+                  <li>Award: Bachelor's Degree Gold Medalist</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="grid section">
+      <article class="card span-8">
+        <div class="in">
+          <h2>About</h2>
+          <p>
+            I work on deep learning methods for remote sensing imagery, with an emphasis on transformer-based architectures,
+            attention mechanisms, and generative approaches for enhancement tasks (e.g., super-resolution and dehazing),
+            plus bitemporal change detection.
+          </p>
+          <div class="hr"></div>
+          <h2>Research Interests</h2>
+          <div class="tags">
+            <span class="tag">Deep Learning</span>
+            <span class="tag">Transformers</span>
+            <span class="tag">Generative AI Models</span>
+            <span class="tag">Image Processing</span>
+            <span class="tag">Remote Sensing</span>
+            <span class="tag">AI in Healthcare</span>
+            <span class="tag">Data Analytics & Visualization</span>
+          </div>
+        </div>
+      </article>
+
+      <aside class="card span-4">
+        <div class="in">
+          <h2>Contact</h2>
+          <p class="muted" style="margin-bottom:10px;">Best ways to reach me:</p>
+          <ul class="list">
+            <li class="item">
+              <div class="top">
+                <div>
+                  <h3>Email</h3>
+                  <div class="where"><a href="mailto:naveedsultan587@gmail.com">naveedsultan587@gmail.com</a></div>
+                </div>
+                <div class="time">Primary</div>
+              </div>
+            </li>
+            <li class="item">
+              <div class="top">
+                <div>
+                  <h3>Work Email</h3>
+                  <div class="where"><a href="mailto:naveed.sult@kmutt.ac.th">naveed.sult@kmutt.ac.th</a></div>
+                </div>
+                <div class="time">KMUTT</div>
+              </div>
+            </li>
+            <li class="item">
+              <div class="top">
+                <div>
+                  <h3>Links</h3>
+                  <div class="where">
+                    <a href="https://orcid.org/0009-0007-6020-1903" target="_blank" rel="noopener">ORCID</a> •
+                    <a href="https://www.linkedin.com/in/naveed-sultan/" target="_blank" rel="noopener">LinkedIn</a>
+                  </div>
+                </div>
+                <div class="time">Online</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="grid section">
+      <article class="card span-12">
+        <div class="in">
+          <h2>Work Experience</h2>
+          <ul class="list searchable">
+            <li class="item" data-keywords="kmutt king mongkut researcher lecturer teaching proposals conferences journals mentoring grants collaborations bangkok thailand">
+              <div class="top">
+                <div>
+                  <h3>Researcher / Lecturer</h3>
+                  <div class="where">King Mongkut's University of Technology Thonburi (KMUTT) — Computer Engineering, Bangkok, Thailand</div>
+                </div>
+                <div class="time">Nov 2024 – Present</div>
+              </div>
+              <ul>
+                <li>Teaching courses to the International Program</li>
+                <li>Research activities (proposals, conferences, journals)</li>
+                <li>Mentoring senior project students; research grant activities</li>
+                <li>Collaborations with national and international institutions</li>
+              </ul>
+            </li>
+
+            <li class="item" data-keywords="chulalongkorn research assistant lab analysis proposal writing publications bangkok thailand">
+              <div class="top">
+                <div>
+                  <h3>Research Assistant</h3>
+                  <div class="where">Chulalongkorn University — Electrical Engineering, Bangkok, Thailand</div>
+                </div>
+                <div class="time">Jul 2024 – Sep 2024</div>
+              </div>
+              <ul>
+                <li>Managed lab work, experimental analysis, proposal writing, publications</li>
+              </ul>
+            </li>
+
+            <li class="item" data-keywords="hse moscow research assistant spectrometry data annotation end-to-end learning russia">
+              <div class="top">
+                <div>
+                  <h3>Research Assistant</h3>
+                  <div class="where">National Research University — Higher School of Economics (HSE), Moscow, Russia</div>
+                </div>
+                <div class="time">Sep 2021 – Jun 2022</div>
+              </div>
+              <ul>
+                <li>End-to-end learning for spectrometry data annotation research project</li>
+              </ul>
+            </li>
+
+            <li class="item" data-keywords="british council venue staff examinations security guidelines regulations pakistan">
+              <div class="top">
+                <div>
+                  <h3>Venue Staff</h3>
+                  <div class="where">British Council — Rahim Yar Khan, Pakistan</div>
+                </div>
+                <div class="time">Apr 2020 – Mar 2022</div>
+              </div>
+              <ul>
+                <li>Supervised examinations to ensure guidelines and paper security</li>
+                <li>Controlled examination environment to prevent fraud</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications" class="grid section">
+      <article class="card span-12">
+        <div class="in">
+          <h2>Publications</h2>
+
+          <ul class="list searchable" style="margin-top:12px;">
+            <li class="item" data-keywords="2026 diffusion state contextual hybrid network physics inspired direction aware dehazing remote sensing imagery ieee transactions geoscience remote sensing under review">
+              <div class="top">
+                <div>
+                  <h3>
+                    <a class="pub-title" href="https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=36" target="_blank" rel="noopener">
+                      Diffusion-State-Contextual Hybrid Network for Physics-Inspired and Direction-Aware Dehazing of Remote Sensing Imagery
+                    </a>
+                  </h3>
+                  <div class="where">IEEE Transactions on Geoscience and Remote Sensing — Under review (2026)</div>
+                </div>
+                <div class="time"><span class="badge">Under review</span></div>
+              </div>
+              <div class="where" style="margin-top:8px;">
+                Authors: N. Sultan, M. Hayat, S. Prom-on •
+                <a href="https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=36" target="_blank" rel="noopener">IEEE TGRS page</a>
+              </div>
+            </li>
+
+            <li class="item" data-keywords="2025 hit-rsnet transformer based super-resolution hierarchical modeling ieee access">
+              <div class="top">
+                <div>
+                  <h3>
+                    <a class="pub-title" href="https://ieeexplore.ieee.org/document/11184784" target="_blank" rel="noopener">
+                      HiT-RSNet: Enhancing Remote Sensing Effectiveness using Transformer-based Super-Resolution Network and Hierarchical Modeling Approach
+                    </a>
+                  </h3>
+                  <div class="where">IEEE Access (2025)</div>
+                </div>
+                <div class="time">2025</div>
+              </div>
+              <div class="where" style="margin-top:8px;">Authors: N. Sultan, S. Prom-On</div>
+            </li>
+
+            <li class="item" data-keywords="2025 tempfusenet temporal coordination progressive attention guided decoding bitemporal change detection icaai acm manchester presented waiting for publication">
+              <div class="top">
+                <div>
+                  <h3>
+                    <a class="pub-title" href="https://www.icaai.org/" target="_blank" rel="noopener">
+                      TempFuseNet: Temporal Coordination and Progressive Attention-Guided Decoding for Bitemporal Change Detection in Remote Sensing Imagery
+                    </a>
+                  </h3>
+                  <div class="where">ICAAI 2025 (ACM) — Manchester, UK • Presented; waiting for publication (Nov 14–16, 2025)</div>
+                </div>
+                <div class="time"><span class="badge warn">Presented</span></div>
+              </div>
+              <div class="where" style="margin-top:8px;">Authors: N. Sultan, S. Prom-On</div>
+            </li>
+
+            <li class="item" data-keywords="2025 hybridatnet multi-scale attention hybrid feature refinement remote sensing super-resolution ieee access">
+              <div class="top">
+                <div>
+                  <h3>
+                    <a class="pub-title" href="https://ieeexplore.ieee.org/document/11153914" target="_blank" rel="noopener">
+                      HybridATNet: Multi-Scale Attention and Hybrid Feature Refinement Network for Remote Sensing Image Super-Resolution
+                    </a>
+                  </h3>
+                  <div class="where">IEEE Access (2025)</div>
+                </div>
+                <div class="time">2025</div>
+              </div>
+              <div class="where" style="margin-top:8px;">Authors: N. Sultan, W. Ruangsang, S. Aramvith</div>
+            </li>
+
+            <li class="item" data-keywords="2025 isryolo small object detection aerial imagery super-resolution attention fusion jcsse chiang mai presented waiting for publication">
+              <div class="top">
+                <div>
+                  <h3>
+                    <a class="pub-title" href="https://ieeexplore.ieee.org/document/11297913" target="_blank" rel="noopener">
+                      ISRYOLO: Improving Small Object Detection in Aerial Imagery via Super-Resolution and Attention Fusion
+                    </a>
+                  </h3>
+                  <div class="where">JCSSE 2025 — Chiang Mai, Thailand</div>
+                </div>
+                <div class="time"><span class="badge warn">Presented</span></div>
+              </div>
+              <div class="where" style="margin-top:8px;">Authors: Book, Nutt, N. Sultan, S. Prom-On</div>
+            </li>
+
+            <li class="item" data-keywords="2025 super-resolution network gastrointestinal endoscopic imaging adaptive convolutional feature fusion itc-cscc seoul">
+              <div class="top">
+                <div>
+                  <h3>
+                    <a class="pub-title" href="https://ieeexplore.ieee.org/abstract/document/11137753" target="_blank" rel="noopener">
+                      A Super-Resolution Network for Gastrointestinal Endoscopic Imaging via Adaptive Convolutional Feature Fusion
+                    </a>
+                  </h3>
+                  <div class="where">ITC-CSCC 2025 — Seoul, South Korea</div>
+                </div>
+                <div class="time">2025</div>
+              </div>
+              <div class="where" style="margin-top:8px;">Authors: N. Sultan, S. Prom-On</div>
+            </li>
+
+            <li class="item" data-keywords="2024 channel spatial attention feature extraction remote sensing super-resolution vision transformer masters thesis">
+              <div class="top">
+                <div>
+                  <h3>
+                    <a class="pub-title" href="https://digital.car.chula.ac.th/chulaetd/11989/" target="_blank" rel="noopener">
+                      A Channel and Spatial Attention Feature Extraction Method for Remote Sensing Image Super-Resolution using Vision Transformer
+                    </a>
+                  </h3>
+                  <div class="where">Master's Thesis (2024)</div>
+                </div>
+                <div class="time">2024</div>
+              </div>
+            </li>
+
+            <li class="item" data-keywords="2024 advanced feature extraction module remote sensing image super-resolution ecticon ieee thailand">
+              <div class="top">
+                <div>
+                  <h3>
+                    <a class="pub-title" href="https://ieeexplore.ieee.org/document/10595015/" target="_blank" rel="noopener">
+                      An Advanced Feature Extraction Module for Remote Sensing Image Super-Resolution
+                    </a>
+                  </h3>
+                  <div class="where">ECTICON 2024 (IEEE), Thailand</div>
+                </div>
+                <div class="time">2024</div>
+              </div>
+              <div class="where" style="margin-top:8px;">Authors: N. Sultan, A. Hajian, S. Aramvith</div>
+            </li>
+
+            <li class="item" data-keywords="2022 sentiment analysis amazon product reviews supervised machine learning knowledge engineering data science">
+              <div class="top">
+                <div>
+                  <h3>
+                    <a class="pub-title" href="https://citeus.um.ac.id/keds/vol5/iss1/9/" target="_blank" rel="noopener">
+                      Sentiment Analysis of Amazon Product Reviews using Supervised Machine Learning Techniques
+                    </a>
+                  </h3>
+                  <div class="where">Knowl. Eng. Data Sci., vol. 5, no. 1, pp. 101 (Jun 2022)</div>
+                </div>
+                <div class="time">2022</div>
+              </div>
+              <div class="where" style="margin-top:8px;">Reference: N. Sultan</div>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- TEACHING -->
+    <section id="teaching" class="grid section">
+      <article class="card span-12">
+        <div class="in">
+          <h2>Teaching</h2>
+          <ul class="list searchable">
+            <li class="item" data-keywords="2026 introduction to gis programming python kmutt">
+              <div class="top">
+                <div>
+                  <h3>Introduction to GIS Programming with Python</h3>
+                  <div class="where">KMUTT</div>
+                </div>
+                <div class="time">Jan 2026 – May 2026</div>
+              </div>
+            </li>
+
+            <li class="item" data-keywords="cpe100 computer programming for engineers international program kmutt 2024 2025">
+              <div class="top">
+                <div>
+                  <h3>CPE100 — Computer Programming for Engineers</h3>
+                  <div class="where">International Undergrad Program, CPE KMUTT</div>
+                </div>
+                <div class="time">Aug 2024 – Nov 2025</div>
+              </div>
+            </li>
+
+            <li class="item" data-keywords="cpe393 data science with python exchange students france esiea 2025">
+              <div class="top">
+                <div>
+                  <h3>CPE393 — Data Science with Python</h3>
+                  <div class="where">Exchange Students (France / ESIEA), KMUTT</div>
+                </div>
+                <div class="time">Jun 2025 – Jul 2025</div>
+              </div>
+            </li>
+
+            <li class="item" data-keywords="cpe494 python programming fundamentals exchange students france esiea 2025">
+              <div class="top">
+                <div>
+                  <h3>CPE494 — Python Programming Fundamentals</h3>
+                  <div class="where">Exchange Students (France / ESIEA), KMUTT</div>
+                </div>
+                <div class="time">May 2025</div>
+              </div>
+            </li>
+
+            <li class="item" data-keywords="cpe112 data structures algorithms kmutt 2025">
+              <div class="top">
+                <div>
+                  <h3>CPE112 — Data Structures and Algorithms</h3>
+                  <div class="where">KMUTT</div>
+                </div>
+                <div class="time">Jan 2025 – May 2025</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- GRANTS -->
+    <section id="grants" class="grid section">
+      <article class="card span-12">
+        <div class="in">
+          <h2>Research Grants</h2>
+          <ul class="list searchable">
+            <li class="item" data-keywords="kmutt university research grant 150000 thb pi internal research super-resolution transformer hierarchical modeling 2025">
+              <div class="top">
+                <div>
+                  <h3>KMUTT University Research Grant (PI) — 150,000 THB</h3>
+                  <div class="where">Topic: Enhancing Remote Sensing Effectiveness using Transformer-based Super-Resolution Network and Hierarchical Modeling Approach</div>
+                </div>
+                <div class="time">Jan 2025 – Oct 2025</div>
+              </div>
+            </li>
+
+            <li class="item" data-keywords="fundamental funds 70 government thailand 1.03m co-researcher hyperspectral high-resolution sentinel-2 hires-s2th 2025 2026">
+              <div class="top">
+                <div>
+                  <h3>Fundamental Funds 70 — Government of Thailand (Co-Researcher) — 1.03M THB</h3>
+                  <div class="where">Topic: Hyperspectral High-Resolution Sentinel-2 for Thailand (HiRes-S2TH)</div>
+                </div>
+                <div class="time">Oct 2025 – Sep 2026</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="grid section">
+      <article class="card span-12">
+        <div class="in">
+          <h2>Skills</h2>
+          <div class="grid" style="margin-top:0;">
+            <div class="span-6">
+              <h3 style="margin:0 0 8px; font-size:14px;">Technical</h3>
+              <div class="tags searchable">
+                <span class="tag" data-keywords="python">Python</span>
+                <span class="tag" data-keywords="qgis">QGIS</span>
+                <span class="tag" data-keywords="cpp c++">C++</span>
+                <span class="tag" data-keywords="opencv">OpenCV</span>
+                <span class="tag" data-keywords="scikit-learn">Scikit-Learn</span>
+                <span class="tag" data-keywords="linux">Linux</span>
+                <span class="tag" data-keywords="pytorch">PyTorch</span>
+                <span class="tag" data-keywords="tensorflow">TensorFlow</span>
+                <span class="tag" data-keywords="opencl cuda gpu">OpenCL</span>
+                <span class="tag" data-keywords="cuda gpu">CUDA</span>
+                <span class="tag" data-keywords="git">Git</span>
+              </div>
+            </div>
+
+            <div class="span-6">
+              <h3 style="margin:0 0 8px; font-size:14px;">Soft Skills</h3>
+              <div class="tags searchable">
+                <span class="tag" data-keywords="problem solving">Problem Solving</span>
+                <span class="tag" data-keywords="critical thinking">Critical Thinking</span>
+                <span class="tag" data-keywords="team work teamwork">Team Work</span>
+                <span class="tag" data-keywords="collaboration">Collaboration</span>
+                <span class="tag" data-keywords="time management">Time Management</span>
+                <span class="tag" data-keywords="presentation communication">Presentation & Communication</span>
+              </div>
+            </div>
+
+            <div class="span-12" style="margin-top:8px;">
+              <h3 style="margin:0 0 8px; font-size:14px;">Laboratory Skills</h3>
+              <div class="tags searchable">
+                <span class="tag" data-keywords="statistical data analysis">Statistical Data Analysis</span>
+                <span class="tag" data-keywords="multimedia tools">Multimedia Tools</span>
+                <span class="tag" data-keywords="data analysis data collection">Data Analysis & Data Collection</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- SERVICE -->
+    <section id="service" class="grid section">
+      <article class="card span-12">
+        <div class="in">
+          <h2>Service, Memberships, Awards</h2>
+
+          <div class="grid" style="margin-top:8px;">
+            <div class="span-6">
+              <h3 style="margin:0 0 10px; font-size:14px;">Volunteering / Reviewing</h3>
+              <ul class="list searchable">
+                <li class="item" data-keywords="ieee access peer reviewer image processing super-resolution classification deep learning segmentation">
+                  <div class="top">
+                    <div>
+                      <h3>IEEE Access — Peer Reviewer</h3>
+                      <div class="where">Image Processing, Super-Resolution, Classification, Deep Learning, Segmentation</div>
+                    </div>
+                    <div class="time">Jul 2024 – Present</div>
+                  </div>
+                </li>
+
+                <li class="item" data-keywords="elsevier peer reviewer digital signal processing neurocomputing information processing and management">
+                  <div class="top">
+                    <div>
+                      <h3>Elsevier — Peer Reviewer</h3>
+                      <div class="where">Digital Signal Processing • Neurocomputing • Information Processing and Management</div>
+                    </div>
+                    <div class="time">Nov 2025</div>
+                  </div>
+                </li>
+
+                <li class="item" data-keywords="aiipcc reviewer international conference artificial intelligence information processing cloud computing">
+                  <div class="top">
+                    <div>
+                      <h3>AIIPCC — Reviewer</h3>
+                      <div class="where">International Conference on Artificial Intelligence, Information Processing and Cloud Computing</div>
+                    </div>
+                    <div class="time">Oct 2025</div>
+                  </div>
+                </li>
+
+                <li class="item" data-keywords="rsso remote sensing for sustainable oceans bon view publishing peer reviewer">
+                  <div class="top">
+                    <div>
+                      <h3>Remote Sensing for Sustainable Oceans (RSSO) — Peer Reviewer</h3>
+                      <div class="where">Bon View Publishing</div>
+                    </div>
+                    <div class="time">Aug 2025 – Present</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="span-6">
+              <h3 style="margin:0 0 10px; font-size:14px;">Awards & Memberships</h3>
+              <ul class="list searchable">
+                <li class="item" data-keywords="award scholarship asean non-asean chulalongkorn 2022">
+                  <div class="top">
+                    <div>
+                      <h3>ASEAN and Non-ASEAN Scholarship Award</h3>
+                      <div class="where">Chulalongkorn University</div>
+                    </div>
+                    <div class="time">Aug 2022</div>
+                  </div>
+                </li>
+
+                <li class="item" data-keywords="award gold medalist bachelors degree kfueit 2021">
+                  <div class="top">
+                    <div>
+                      <h3>Bachelor's Degree Gold Medalist</h3>
+                      <div class="where">Khwaja Fareed University of Engineering and Information Technology</div>
+                    </div>
+                    <div class="time">Aug 2021</div>
+                  </div>
+                </li>
+
+                <li class="item" data-keywords="prime minister laptop award pakistan 2018">
+                  <div class="top">
+                    <div>
+                      <h3>Prime Minister Laptop Award</h3>
+                      <div class="where">Government of Pakistan</div>
+                    </div>
+                    <div class="time">Feb 2018</div>
+                  </div>
+                </li>
+
+                <li class="item" data-keywords="ieee general membership 2024">
+                  <div class="top">
+                    <div>
+                      <h3>IEEE — General Membership</h3>
+                      <div class="where">Member</div>
+                    </div>
+                    <div class="time">May 2024 – Present</div>
+                  </div>
+                </li>
+
+                <li class="item" data-keywords="ieee geoscience remote sensing society grss 2024">
+                  <div class="top">
+                    <div>
+                      <h3>IEEE Geoscience and Remote Sensing Society (GRSS)</h3>
+                      <div class="where">Member</div>
+                    </div>
+                    <div class="time">May 2024 – Present</div>
+                  </div>
+                </li>
+
+                <li class="item" data-keywords="ieee computer society 2024">
+                  <div class="top">
+                    <div>
+                      <h3>IEEE Computer Society</h3>
+                      <div class="where">Member</div>
+                    </div>
+                    <div class="time">Aug 2024 – Present</div>
+                  </div>
+                </li>
+              </ul>
+
+              <div class="hr"></div>
+              <h3 style="margin:0 0 8px; font-size:14px;">Languages</h3>
+              <div class="tags searchable">
+                <span class="tag" data-keywords="urdu">Urdu (Mother tongue)</span>
+                <span class="tag" data-keywords="english c1 b2">English (CEFR: Listening C1, Reading C1, Writing C1, Spoken Production B2, Interaction C1)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="grid section">
+      <article class="card span-12">
+        <div class="in">
+          <h2>Contact & Recommendations</h2>
+          <div class="grid" style="margin-top:12px;">
+            <div class="span-6">
+              <div class="item searchable" data-keywords="asim saleem mentor ripha international university chulalongkorn recommendation">
+                <div class="top">
+                  <div>
+                    <h3>Asst. Prof. Dr. Asim Saleem — Mentor</h3>
+                    <div class="where">Ripha International University (Pakistan) & Chulalongkorn University (Thailand)</div>
+                  </div>
+                  <div class="time">Reference</div>
+                </div>
+                <div class="where" style="margin-top:10px;">
+                  Phone: (+66) 631345346 • Email:
+                  <a href="mailto:Muhammadasim.S@chula.ac.th">Muhammadasim.S@chula.ac.th</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="span-6">
+              <div class="item searchable" data-keywords="mansoor hayat research mentor postdoctoral fellow surgery health science center winnipeg recommendation">
+                <div class="top">
+                  <div>
+                    <h3>Dr. Mansoor Hayat — Research Mentor</h3>
+                    <div class="where">Postdoctoral Fellow, Department of Surgery, Health Science Center, Winnipeg, Canada</div>
+                  </div>
+                  <div class="time">Reference</div>
+                </div>
+                <div class="where" style="margin-top:10px;">
+                  Phone: (+1) 2043905379 • Email:
+                  <a href="mailto:mansoor.hayat@umanitoba.ca">mansoor.hayat@umanitoba.ca</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hr"></div>
+          <p class="muted" style="margin:0;">
+            © <span id="year"></span> Naveed Sultan.
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <p class="foot">All right reserved</p>
+  </main>
+
+  <script>
+    // --- Search filter ---
+    const searchBox = document.getElementById('searchBox');
+    const searchableBlocks = () => Array.from(document.querySelectorAll('.searchable .item, .searchable .tag'));
+
+    function normalize(s){ return (s || '').toLowerCase().trim(); }
+
+    function applySearch(q){
+      const query = normalize(q);
+      const tokens = query.split(/\s+/).filter(Boolean);
+
+      searchableBlocks().forEach(el => {
+        const text = normalize(el.textContent);
+        const kw = normalize(el.getAttribute('data-keywords'));
+        const hay = text + " " + kw;
+
+        const ok = tokens.length === 0 || tokens.every(t => hay.includes(t));
+        el.style.display = ok ? '' : 'none';
+      });
+    }
+
+    if(searchBox){
+      searchBox.addEventListener('input', (e) => applySearch(e.target.value));
+    }
+    applySearch('');
+
+    // year
+    const yearEl = document.getElementById('year');
+    if(yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // --- Scroll progress ---
+    const progressBar = document.getElementById('progressBar');
+    function updateProgress(){
+      if(!progressBar) return;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const doc = document.documentElement;
+      const scrollHeight = doc.scrollHeight - doc.clientHeight;
+      const p = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      progressBar.style.width = p.toFixed(2) + "%";
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    // --- Reveal on scroll ---
+    const revealEls = Array.from(document.querySelectorAll('.card, .item'));
+    revealEls.forEach(el => el.classList.add('reveal'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => io.observe(el));
+
+    // --- Back to top ---
+    const toTopBtn = document.getElementById('toTopBtn');
+    function updateTopBtn(){
+      if(!toTopBtn) return;
+      toTopBtn.style.display = (window.scrollY > 600) ? "inline-flex" : "none";
+    }
+    window.addEventListener('scroll', updateTopBtn, { passive: true });
+    updateTopBtn();
+    if(toTopBtn){
+      toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+
+    // --- Copy email to clipboard (optional convenience) ---
+    document.addEventListener('click', async (e) => {
+      const t = e.target.closest('[data-copy]');
+      if(!t) return;
+      const val = t.getAttribute('data-copy');
+      try{
+        await navigator.clipboard.writeText(val);
+        const old = t.textContent;
+        t.textContent = "Copied!";
+        setTimeout(() => t.textContent = old, 900);
+      }catch(_){}
+    });
+
+    // --- Interactive spotlight follows mouse/touch ---
+    // --- NEW: Smooth spotlight + parallax background ---
+const spotlight = document.getElementById('spotlight');
+const blobs = Array.from(document.querySelectorAll('.blob'));
+const grid = document.querySelector('.bg-grid');
+
+let mouseX = window.innerWidth * 0.55;
+let mouseY = window.innerHeight * 0.18;
+let currentX = mouseX;
+let currentY = mouseY;
+
+function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+
+function onMove(x, y){
+  mouseX = clamp(x, 0, window.innerWidth);
+  mouseY = clamp(y, 0, window.innerHeight);
+}
+
+window.addEventListener('mousemove', (e) => onMove(e.clientX, e.clientY), { passive:true });
+window.addEventListener('touchmove', (e) => {
+  if(!e.touches || !e.touches[0]) return;
+  onMove(e.touches[0].clientX, e.touches[0].clientY);
+}, { passive:true });
+
+// Smooth follow using requestAnimationFrame
+function animateBG(){
+  // ease factor (smaller = smoother)
+  const ease = 0.10;
+  currentX += (mouseX - currentX) * ease;
+  currentY += (mouseY - currentY) * ease;
+
+  if(spotlight){
+    spotlight.style.setProperty('--x', currentX + 'px');
+    spotlight.style.setProperty('--y', currentY + 'px');
+  }
+
+  // Parallax grid
+  if(grid){
+    const gx = (currentX / window.innerWidth - 0.5) * 10;
+    const gy = (currentY / window.innerHeight - 0.5) * 10;
+    grid.style.transform = `translate3d(${gx}px, ${gy}px, 0)`;
+  }
+
+  // Parallax blobs (subtle different speeds)
+  blobs.forEach((b, i) => {
+    const sx = (currentX / window.innerWidth - 0.5) * (14 + i*6);
+    const sy = (currentY / window.innerHeight - 0.5) * (10 + i*5);
+    b.style.transform = `translate3d(${sx}px, ${sy}px, 0)`;
+  });
+
+  requestAnimationFrame(animateBG);
+}
+animateBG();
+
+
+    // ✅ NEW: Auto-count stats in the "Research Snapshot" card
+    function updateSnapshot(){
+      const pubs = document.querySelectorAll('#publications .list .item').length;
+      const teach = document.querySelectorAll('#teaching .list .item').length;
+      const grants = document.querySelectorAll('#grants .list .item').length;
+
+      const p = document.getElementById('statPubs');
+      const t = document.getElementById('statTeaching');
+      const g = document.getElementById('statGrants');
+
+      if(p) p.textContent = pubs;
+      if(t) t.textContent = teach;
+      if(g) g.textContent = grants;
+    }
+    updateSnapshot();
+  </script>
+</body>
+</html>
